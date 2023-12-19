@@ -2501,16 +2501,8 @@ void CMenus::RenderSettingsAppearance(CUIRect MainView)
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowKillMessages, Localize("Show kill messages"), &g_Config.m_ClShowKillMessages, &Section, LineSize);
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowhudScore, Localize("Show score"), &g_Config.m_ClShowhudScore, &Section, LineSize);
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowLocalTimeAlways, Localize("Show local time always"), &g_Config.m_ClShowLocalTimeAlways, &Section, LineSize);
-
-		// Settings of the HUD element for votes
-		LeftView.HSplitTop(SectionTotalMargin + LineSize, &Section, &LeftView);
-		Section.Margin(SectionMargin, &Section);
-
-		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowVotesAfterVoting, Localize("Show votes window after voting"), &g_Config.m_ClShowVotesAfterVoting, &Section, LineSize);
-
-		// ***** DDRace HUD ***** //
-		RightView.HSplitTop(HeadlineAndVMargin, &Label, &RightView);
-		UI()->DoLabel(&Label, Localize("DDRace HUD"), HeadlineFontSize, TEXTALIGN_ML);
+		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowfps, Localize("Show FPS"), &g_Config.m_ClShowfps, &Section, LineSize);
+		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowpred, Localize("Show Pred"), &g_Config.m_ClShowpred, &Section, LineSize);
 
 		// Switches of various DDRace HUD elements
 		RightView.HSplitTop(SectionTotalMargin + 4 * LineSize, &Section, &RightView);
