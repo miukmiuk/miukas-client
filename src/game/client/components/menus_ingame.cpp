@@ -271,6 +271,9 @@ void CMenus::RenderPlayers(CUIRect MainView)
 
 	// options
 	static char s_aPlayerIDs[MAX_CLIENTS][3] = {{0}};
+	static CButtonContainer s_CopySkins[MAX_CLIENTS]; 
+	static CButtonContainer s_CopyNames[MAX_CLIENTS]; 
+	static CButtonContainer s_CopyClan[MAX_CLIENTS]; 
 
 	for(int i = 0, Count = 0; i < MAX_CLIENTS; ++i)
 	{
@@ -317,6 +320,40 @@ void CMenus::RenderPlayers(CUIRect MainView)
 
 		m_pClient->m_CountryFlags.Render(CurrentClient.m_Country, ColorRGBA(1.0f, 1.0f, 1.0f, 0.5f),
 			Button2.x, Button2.y + Button2.h / 2.0f - 0.75f * Button2.h / 2.0f, 1.5f * Button2.h, 0.75f * Button2.h);
+
+		/*  * * * * * * * * * * * * * * * * *							
+			*								*
+			*	TODO: FIX BUTTON POSITIONS; * 
+			*								*
+			* * * * * * * * * * * * * * * * *
+		*/
+
+		// copy name button
+		 if (DoButton_Menu(&s_CopyNames[Index], Localize("Copy Name"), 0, &Player))
+		{
+			str_copy(g_Config.m_PlayerName, CurrentClient.m_aName, sizeof(g_Config.m_PlayerName));
+
+			m_pClient->SendInfo(false);
+		} 
+
+		// copy clan button
+		 if (DoButton_Menu(&s_CopyClan[Index], Localize("Copy Clan"), 0, &Button))
+		{
+			str_copy(g_Config.m_PlayerClan, CurrentClient.m_aClan, sizeof(g_Config.m_PlayerClan));
+
+			m_pClient->SendInfo(false);
+		} 
+
+		// copy skin button
+		if (DoButton_Menu(&s_CopySkins[Index], Localize("Copy Skin"), 0, &Button2))
+		{
+			g_Config.m_ClPlayerUseCustomColor = CurrentClient.m_UseCustomColor;
+			g_Config.m_ClPlayerColorBody = CurrentClient.m_ColorBody;
+			g_Config.m_ClPlayerColorFeet = CurrentClient.m_ColorFeet;
+			str_copy(g_Config.m_ClPlayerSkin, CurrentClient.m_aSkinName, sizeof(g_Config.m_ClPlayerSkin));
+
+			m_pClient->SendInfo(false);
+		} 
 
 		// ignore chat button
 		Row.HMargin(2.0f, &Row);
